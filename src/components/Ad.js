@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Ad = (props) => {
+    console.log("we got", props);
     return (
         <ul>
             <li>
@@ -8,8 +9,8 @@ const Ad = (props) => {
                 PICTURE
             </li>
             <li>
-                <h3></h3>
-                <p></p>
+                <h3>Title: {props.ad.name}</h3>
+                <p>Price: {props.ad.price}</p>
             </li>
         </ul>
     )

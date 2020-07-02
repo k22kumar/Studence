@@ -1,10 +1,13 @@
 import React, {useState, useEffect} from 'react'
-import './App.css';
 import Navigation from './components/Navigation';
 import AdBoard from './components/AdBoard';
+import './App.scss';
 
 function App() {
-  let users = { 
+  // state variables
+  const [users,setUsers] = useState([]);
+  // mock data
+  let mockUsers = { 
     Kajanth : {
       password: "pass",
       itemsForSale: [
@@ -44,6 +47,16 @@ function App() {
       itemsForSale: []
     }
   };
+
+  // component did mount, go and update the users state
+  useEffect(()=>{
+    let newUsers = [];
+    // gor through
+    for (let user in mockUsers) {
+      newUsers.push(mockUsers[user]);
+    }
+    setUsers(newUsers);
+  }, []);
 
   return (
     <div className="App">

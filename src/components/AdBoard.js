@@ -4,12 +4,16 @@ import Ad from './Ad';
 const AdBoard = (props) => {
     return (
         <ul>
-        {console.log(props.ads)}
+        {/* {console.log(props.ads)} */}
             {
-                forEach thing in props.ad {
-                    return <Ad />
-                }
-                
+                props.ads.map((user) => {
+                    return(
+                        user.itemsForSale.map((ad, index) => {
+                            console.log("the ad ", ad);
+                            return <Ad key={index} ad={ad} />;
+                        })
+                    )
+                })
             }
         </ul>
     )
