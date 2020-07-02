@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import Navigation from './components/Navigation';
 import AdBoard from './components/AdBoard';
+import Account from './components/Account';
 import './App.scss';
 
 function App() {
@@ -9,8 +10,9 @@ function App() {
   const [users,setUsers] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   // mock data
-  let mockUsers = { 
-    Kajanth : {
+  let mockUsers = [ 
+     {
+      username: "Kajanth",
       password: "pass",
       itemsForSale: [
         {
@@ -27,7 +29,8 @@ function App() {
         },
       ]
     },
-    George: {
+  {
+        username: "George",
         password: "pass",
         itemsForSale: [
           {
@@ -44,15 +47,17 @@ function App() {
           },
         ]
     },
-    Susan: {
+    {
+      username: "Susan",
       password: "pass",
       itemsForSale: []
     }
-  };
+  ];
 
   // component did mount, go and update the users state
   useEffect(()=>{
     let newUsers = [];
+    console.log("use", mockUsers)
     // gor through
     for (let user in mockUsers) {
       newUsers.push(mockUsers[user]);
@@ -60,15 +65,29 @@ function App() {
     setUsers(newUsers);
   }, []);
 
-  const logUserIn = () => {
-    setIsLoggedIn(true);
+  //function to verify login
+  const logUserIn = (username, password) => {
+    users.map((user) => {
+      if(username === user.username && password === user.password){
+        setIsLoggedIn(true);
+        console.log("user attempt: ", user.username, username);
+        console.log("pass attempt: ", user.password, password);
+        return true;
+      }
+      else{
+        console.log("fail");
+      }
+    });
   }
 
   return (
-    <div className="App">
-      <Navigation logUserIn={logUserIn} isLoggedIn={isLoggedIn}/>
-      <AdBoard ads={users}/>
-    </div>
+    <Router>
+      <div className="App">
+        <Navigation/>
+        <Route exact path='/' render={(props) => <AdBoard  ads={users}/>}/>
+        <Route path="/account" render={(props) => <Account isLoggedIn={isLoggedIn} logUserIn={logUserIn}/>}/>
+      </div>
+    </Router>  
   );
 }
 
