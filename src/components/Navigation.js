@@ -10,7 +10,7 @@ const Navigation = (props) => {
     return (
         <nav>
             <Link exact to="/"><h1>Studence</h1></Link>
-            <button>Post Ad</button>
+            <Link to="/postAd">Post Ad</Link>
             <Link to="/account">{welcome}</Link>
             <button>Cart</button>
         </nav>

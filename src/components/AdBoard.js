@@ -4,7 +4,6 @@ import Ad from './Ad';
 const AdBoard = (props) => {
     return (
         <ul>
-        {/* {console.log(props.ads)} */}
             {
                 props.ads.map((user) => {
                     return(
