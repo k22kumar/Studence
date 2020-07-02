@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import Navigation from './components/Navigation';
 import AdBoard from './components/AdBoard';
 import './App.scss';
@@ -6,6 +7,7 @@ import './App.scss';
 function App() {
   // state variables
   const [users,setUsers] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   // mock data
   let mockUsers = { 
     Kajanth : {
@@ -58,9 +60,13 @@ function App() {
     setUsers(newUsers);
   }, []);
 
+  const logUserIn = () => {
+    setIsLoggedIn(true);
+  }
+
   return (
     <div className="App">
-      <Navigation/>
+      <Navigation logUserIn={logUserIn} isLoggedIn={isLoggedIn}/>
       <AdBoard ads={users}/>
     </div>
   );
