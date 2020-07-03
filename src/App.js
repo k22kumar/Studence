@@ -103,22 +103,30 @@ function App() {
     })
   }
 
+  // START OF REGISTER
   // function to register new users with unique usernames
   const registerUser = (username, password, e) => {
     e.preventDefault();
     let usernameTaken = false;
-    const dbRef = firebase.database().ref().once('value').then( (snapshot) => {
+
+    const dbRef = firebase.database().ref().once('value', (snapshot) => {
       const data = snapshot.val();
-      for(let key in users) {
+      console.log("the data", data);
+      for (let key in data.users) {
+        
+        console.log(data.users[key].username);
         // since ther is no ignoreCase method in javaScript use upper instead 
-        if (username.toUpperCase() === users[key].username.toUpperCase()){
-          usernameTaken=true;
-          console.log("comparing: " + username.toUpperCase() + " " + users[key].username.toUpperCase());
+        if (username.toUpperCase() === data.users[key].username.toUpperCase()) {
+          usernameTaken = true;
+          console.log("comparing: " + username.toUpperCase() + " " + data.users[key].username.toUpperCase());
           console.log("username is taken!!");
-          break;
         }
+        console.log(usernameTaken);
       }
-      if(!usernameTaken){
+
+      console.log("final", usernameTaken);
+      if (usernameTaken === false) {
+        console.log("setting");
         const dbRef2 = firebase.database().ref('users/');
         dbRef2.push({
           username: username,
@@ -127,8 +135,10 @@ function App() {
         setCurrUser(username);
         setIsLoggedIn(true);
       }
+
     });
   }
+  // ENNDD OF REGISTER
 
   return (
     <Router>
