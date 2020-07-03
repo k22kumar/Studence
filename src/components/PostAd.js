@@ -22,7 +22,7 @@ const PostAd = (props) => {
 
     return(
         <div>
-            {!props.isLoggedIn && <Login logUserIn={props.logUserIn} />}
+            {!props.isLoggedIn && <Login logUserIn={props.logUserIn} registerUser={props.registerUser}/>}
             {props.isLoggedIn && 
             <form action="" >
                 <label htmlFor="title">Title</label>

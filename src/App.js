@@ -4,6 +4,7 @@ import Navigation from './components/Navigation';
 import AdBoard from './components/AdBoard';
 import Account from './components/Account';
 import PostAd from './components/PostAd';
+import firebase from './components/firebase';
 import './App.scss';
 
 function App() {
@@ -11,6 +12,8 @@ function App() {
   const [users,setUsers] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currUser, setCurrUser] =useState("");
+  
+
   // mock data
   let mockUsers = [ 
      {
@@ -65,6 +68,12 @@ function App() {
       newUsers.push(mockUsers[user]);
     }
     setUsers(newUsers);
+
+    const dbRef = firebase.database().ref();
+    dbRef.on("value", (snapshot) => {
+      const data = snapshot.val();
+      // console.log(data['users']);
+    });
   }, []);
 
   //function to verify login
@@ -84,7 +93,7 @@ function App() {
   }
 
   // function that allows a user to post an ad
-  const postAd = (title, price, picture, description) {
+  const postAd = (title, price, picture, description) => {
     users.map((user) => {
       if(user.username === currUser) {
         console.log(user.itemsForSale);
@@ -94,13 +103,40 @@ function App() {
     })
   }
 
+  // function to register new users with unique usernames
+  const registerUser = (username, password, e) => {
+    e.preventDefault();
+    let usernameTaken = false;
+    const dbRef = firebase.database().ref().once('value').then( (snapshot) => {
+      const data = snapshot.val();
+      for(let key in users) {
+        // since ther is no ignoreCase method in javaScript use upper instead 
+        if (username.toUpperCase() === users[key].username.toUpperCase()){
+          usernameTaken=true;
+          console.log("comparing: " + username.toUpperCase() + " " + users[key].username.toUpperCase());
+          console.log("username is taken!!");
+          break;
+        }
+      }
+      if(!usernameTaken){
+        const dbRef2 = firebase.database().ref('users/');
+        dbRef2.push({
+          username: username,
+          password: password
+        });
+        setCurrUser(username);
+        setIsLoggedIn(true);
+      }
+    });
+  }
+
   return (
     <Router>
       <div className="App">
         <Navigation/>
         <Route exact path='/' render={(props) => <AdBoard  ads={users}/>}/>
-        <Route path="/account" render={(props) => <Account isLoggedIn={isLoggedIn} logUserIn={logUserIn}/>}/>
-        <Route path="/postAd" render={(props) => <PostAd isLoggedIn={isLoggedIn} logUserIn={logUserIn} postAd={postAd}/>} />
+        <Route path="/account" render={(props) => <Account isLoggedIn={isLoggedIn} logUserIn={logUserIn} registerUser={registerUser}/>}/>
+        <Route path="/postAd" render={(props) => <PostAd isLoggedIn={isLoggedIn} logUserIn={logUserIn} registerUser={registerUser} postAd={postAd}/>} />
       </div>
     </Router>  
   );

@@ -6,7 +6,7 @@ const Account = (props) => {
         <div>
             {/* IF LOGGEDIN where users can see their ads/acount info and edit them*/}
             {/* IF NOT LOGGEDIN show sign up stuff*/}
-            {!props.isLoggedIn && <Login logUserIn={props.logUserIn}/>}
+            {!props.isLoggedIn && <Login logUserIn={props.logUserIn} registerUser={props.registerUser}/>}
             {props.isLoggedIn && <h3>HIII</h3>}
         </div>
     )

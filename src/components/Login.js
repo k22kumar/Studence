@@ -39,6 +39,7 @@ const Login = (props) => {
                     <input type="text" id="newUsername" onChange={(e) => {updateText(e, "registerUsername")}}/>
                     <label htmlFor="newPassword">Password</label>
                     <input type="text" id="newPassword" onChange={(e) => { updateText(e, "registerPassword")}}/>
+                    <button onClick={(e) => props.registerUser(registerUsername, registerPassword, e)}>Register</button>
                 </form>
             </li>
         </ul>
