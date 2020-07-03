@@ -33,7 +33,7 @@ const PostAd = (props) => {
                 <input type="text" id="picture" onChange={(e) => { updateText(e, "picture")}}/>
                 <label htmlFor="description">Description</label>
                 <input required type="text" id="description" onChange={(e) => { updateText(e, "description")}}/>
-                <button onClick={props.postAd} >Upload Ad</button>
+                <button onClick={e => props.postAd(title, price, picture, description, e)} >Upload Ad</button>
             </form>}
         </div>
     )

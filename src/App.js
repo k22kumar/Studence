@@ -78,55 +78,45 @@ function App() {
 
   //function to verify login
   const logUserIn = (username, password) => {
-    users.map((user) => {
-      if(username === user.username && password === user.password){
-        setCurrUser(username);
-        setIsLoggedIn(true);
-        console.log("user attempt: ", user.username, username);
-        console.log("pass attempt: ", user.password, password);
-        return true;
-      }
-      else{
-        console.log("fail");
+    const dbRef = firebase.database().ref().once('value', (snapshot) => {
+      // in the data go to the users key
+      const data = snapshot.val().users;
+      for (let key in data) {
+        if (username === data[key].username && password === data[key].password) {
+          setCurrUser(username);
+          setIsLoggedIn(true);
+          console.log("user attempt: ", data[key].username, username);
+          console.log("pass attempt: ", data[key].password, password);
+          return true;
+        }
+        else {
+          console.log("fail");
+        }
       }
     });
   }
 
-  // function that allows a user to post an ad
-  const postAd = (title, price, picture, description) => {
-    users.map((user) => {
-      if(user.username === currUser) {
-        console.log(user.itemsForSale);
-        // logic to post ad here
-        return true;
-      }
-    })
-  }
 
-  // START OF REGISTER
   // function to register new users with unique usernames
   const registerUser = (username, password, e) => {
     e.preventDefault();
     let usernameTaken = false;
-
     const dbRef = firebase.database().ref().once('value', (snapshot) => {
-      const data = snapshot.val();
-      console.log("the data", data);
-      for (let key in data.users) {
-        
-        console.log(data.users[key].username);
+      // in the data go to the users key
+      const data = snapshot.val().users;
+      for (let key in data) {
+        console.log(data[key].username);
         // since ther is no ignoreCase method in javaScript use upper instead 
-        if (username.toUpperCase() === data.users[key].username.toUpperCase()) {
+        if (username.toUpperCase() === data[key].username.toUpperCase()) {
           usernameTaken = true;
-          console.log("comparing: " + username.toUpperCase() + " " + data.users[key].username.toUpperCase());
+          console.log("comparing: " + username.toUpperCase() + " " + data[key].username.toUpperCase());
           console.log("username is taken!!");
+          break;
         }
         console.log(usernameTaken);
       }
-
       console.log("final", usernameTaken);
       if (usernameTaken === false) {
-        console.log("setting");
         const dbRef2 = firebase.database().ref('users/');
         dbRef2.push({
           username: username,
@@ -138,7 +128,21 @@ function App() {
 
     });
   }
-  // ENNDD OF REGISTER
+
+  // function that allows a user to post an ad
+  const postAd = (title, price, picture, description, e) => {
+    e.preventDefault();
+    const dbRef = firebase.database().ref().once('value', (snapshot) => {
+      const data = snapshot.val().itemsForSale;
+      console.log("len", Object.keys(data).length);
+    });
+    const newAd = {
+      title: title,
+      price: price,
+      picture: picture,
+      description: description
+    }
+  }
 
   return (
     <Router>
