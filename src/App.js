@@ -9,7 +9,7 @@ import './App.scss';
 
 function App() {
   // state variables
-  const [users,setUsers] = useState([]);
+  const [ads,setAds] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currUser, setCurrUser] =useState("");
   
@@ -59,19 +59,18 @@ function App() {
     }
   ];
 
-  // component did mount, go and update the users state
+  // component did mount, add a listener to Firebase database and listen for changes on ads
   useEffect(()=>{
-    let newUsers = [];
-    console.log("use", mockUsers)
-    // gor through
-    for (let user in mockUsers) {
-      newUsers.push(mockUsers[user]);
-    }
-    setUsers(newUsers);
     const dbRef = firebase.database().ref();
     dbRef.on("value", (snapshot) => {
-      const data = snapshot.val();
+      const data = snapshot.val().itemsForSale;
       // console.log(data['users']);
+      const updatedAds = [];
+      for(let key in data) {
+        console.log(data[key]);
+        updatedAds.push(data[key]);
+      };
+      setAds(updatedAds);
     });
   }, []);
 
@@ -154,7 +153,7 @@ function App() {
     <Router>
       <div className="App">
         <Navigation/>
-        <Route exact path='/' render={(props) => <AdBoard  ads={users}/>}/>
+        <Route exact path='/' render={(props) => <AdBoard  ads={ads}/>}/>
         <Route path="/account" render={(props) => <Account isLoggedIn={isLoggedIn} logUserIn={logUserIn} registerUser={registerUser}/>}/>
         <Route path="/postAd" render={(props) => <PostAd isLoggedIn={isLoggedIn} logUserIn={logUserIn} registerUser={registerUser} postAd={postAd}/>} />
       </div>

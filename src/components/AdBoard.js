@@ -5,13 +5,9 @@ const AdBoard = (props) => {
     return (
         <ul>
             {
-                props.ads.map((user) => {
-                    return(
-                        user.itemsForSale.map((ad, index) => {
-                            console.log("the ad ", ad);
-                            return <Ad key={index} ad={ad} />;
-                        })
-                    )
+                props.ads.map((ad, index) => {
+                    console.log("the ad ", ad);
+                    return <Ad key={index} ad={ad} />;
                 })
             }
         </ul>

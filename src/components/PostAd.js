@@ -33,7 +33,7 @@ const PostAd = (props) => {
                 Authorization: '563492ad6f917000010000016fbbfe29d1004ae7b7d31d9dab75aed7'
             },
             params: {
-                query: "ocean",
+                query: searchPic,
                 total_results: 10
             }            
         }).then((response) => {
@@ -59,9 +59,8 @@ const PostAd = (props) => {
                 <input type="text" id="searchPic" onChange={(e) => { updateText(e, "searchPic")}}/>
                 <button onClick={(e)=> {searchPicture(e)}}>Search Picture</button>
                 <div>
-                    {photoResults.map((photo) => {
-                        {/* set the picture  */}
-                        return <button className="picChoice" onClick={() => { setPicture(photo.src.original)}} >
+                    {photoResults.map((photo, id) => {
+                        return <button key={id} className="picChoice" onClick={() => { setPicture(photo.src.medium)}} >
                                     <img src={photo.src.original} alt=""/>
                                 </button>
                     })
@@ -70,7 +69,6 @@ const PostAd = (props) => {
                 <label htmlFor="description">Description</label>
                 <input required type="text" id="description" onChange={(e) => { updateText(e, "description")}}/>
                 <button onClick={(e) => {
-                    searchPicture();
                     props.postAd(title, price, picture, description, e);
                 }} >Upload Ad</button>
             </form>}

@@ -5,11 +5,10 @@ const Ad = (props) => {
     return (
         <ul>
             <li>
-                <img src="" alt=""/>
-                PICTURE
+                <img src={props.ad.picture} alt=""/>
             </li>
             <li>
-                <h3>Title: {props.ad.name}</h3>
+                <h3>Title: {props.ad.title}</h3>
                 <p>Price: {props.ad.price}</p>
             </li>
         </ul>
