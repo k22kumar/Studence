@@ -68,7 +68,6 @@ function App() {
       newUsers.push(mockUsers[user]);
     }
     setUsers(newUsers);
-
     const dbRef = firebase.database().ref();
     dbRef.on("value", (snapshot) => {
       const data = snapshot.val();
@@ -132,16 +131,23 @@ function App() {
   // function that allows a user to post an ad
   const postAd = (title, price, picture, description, e) => {
     e.preventDefault();
+    let newAd = {};
     const dbRef = firebase.database().ref().once('value', (snapshot) => {
       const data = snapshot.val().itemsForSale;
       console.log("len", Object.keys(data).length);
-    });
-    const newAd = {
+    
+    newAd = {
+      id: Object.keys(data).length + 1,
+      username: currUser,
       title: title,
       price: price,
       picture: picture,
       description: description
     }
+    console.log(newAd);
+    });
+    const itemsForSale = firebase.database().ref('itemsForSale/');
+    itemsForSale.push(newAd);
   }
 
   return (
