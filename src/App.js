@@ -6,6 +6,7 @@ import Account from './components/Account';
 import PostAd from './components/PostAd';
 import firebase from './components/firebase';
 import FullAd from './components/FullAd';
+import Cart from './components/Cart';
 import './App.scss';
 
 function App() {
@@ -18,6 +19,8 @@ function App() {
   const [currUser, setCurrUser] = useState("");
   // the ad that has been clicked on
   const [selectedAd, setSelectedAd] = useState({});
+  // the cart of the currentUser
+  const [cart, setCart] = useState([]);
   
 
   // component did mount, add a listener to Firebase database and listen for changes on ads
@@ -52,7 +55,6 @@ function App() {
       }
     });
   }
-
 
   // function to register new users with unique usernames
   const registerUser = (username, password, e) => {
@@ -107,6 +109,12 @@ function App() {
     setSelectedAd(adObject);
   }
 
+  const addToCart = (ad) => {
+    let newCart = cart;
+    newCart.push(ad);
+    setCart = newCart;
+  }
+
   return (
     <Router>
       <div className="App">
@@ -116,6 +124,7 @@ function App() {
           currUser={currUser}/>}/>
         <Route path="/postAd" render={() => <PostAd isLoggedIn={isLoggedIn} logUserIn={logUserIn} registerUser={registerUser} postAd={postAd}/>} />
         <Route path="/fullAd/:id" render={() => <FullAd selectedAd={selectedAd} />} />
+        <Route path="/cart/" render={() => <Cart cart={cart} />} />
       </div>
     </Router>  
   );

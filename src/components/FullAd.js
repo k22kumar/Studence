@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 const FullAd = (props) => {
     const {selectedAd} = props;
@@ -9,7 +10,10 @@ const FullAd = (props) => {
             <p>{selectedAd.price}</p>
             <p>{selectedAd.description}</p>
             <p>Sold by: {selectedAd.username}</p>
-            <button>buy</button>
+            <div>
+                <button onClick={props.addToCart(props.ad)}>Add to Cart</button>
+                <Link to={`/cart`} onClick={() => props.addToCart(props.ad)}>Buy</Link>
+            </div>
         </div>
     )
 }
