@@ -85,8 +85,7 @@ function App() {
     e.preventDefault();
     let newAd = {};
     const dbRef = firebase.database().ref().once('value', (snapshot) => {
-      const data = snapshot.val().itemsForSale;
-    
+    const data = snapshot.val().itemsForSale;
     newAd = {
       id: Object.keys(data).length + 1,
       username: currUser,
@@ -98,6 +97,7 @@ function App() {
     });
     const itemsForSale = firebase.database().ref('itemsForSale/');
     itemsForSale.push(newAd);
+    document.getElementById("adPost").reset();
   }
 
   // function that is passed to the Ad component and returns the ad the user clicked on to
@@ -120,7 +120,7 @@ function App() {
     <Router>
       <div className="App">
         <Navigation/>
-        <Route exact path='/' render={() => <AdBoard getSelectedAd={getSelectedAd} ads={ads}/>}/>
+        <Route path='/Studence' render={() => <AdBoard getSelectedAd={getSelectedAd} ads={ads}/>}/>
         <Route path="/account" render={() => <Account getSelectedAd={getSelectedAd} isLoggedIn={isLoggedIn} logUserIn={logUserIn} registerUser={registerUser} ads={ads}
           currUser={currUser}/>}/>
         <Route path="/postAd" render={() => <PostAd isLoggedIn={isLoggedIn} logUserIn={logUserIn} registerUser={registerUser} postAd={postAd}/>} />
