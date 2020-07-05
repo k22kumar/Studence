@@ -37,11 +37,6 @@ const PostAd = (props) => {
                 total_results: 10
             }            
         }).then((response) => {
-            // turn on picture results components
-            // for each picture make it a clickable square component
-            // when its clicked put a border around it and add the string to picture
-            // while the state is blank put a message to recommend choosing a photo
-            console.log(response.data.photos);
             setPhotoResults(response.data.photos);
         })
     }

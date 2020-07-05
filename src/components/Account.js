@@ -3,7 +3,6 @@ import Login from './Login';
 import AdBoard from './AdBoard';
 
 const Account = (props) => {
-    console.log('the adsszz', props.ads);
     let myAds = props.ads;
     myAds = myAds.filter((ad) => { return ad.username === props.currUser });
     return (
