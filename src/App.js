@@ -28,7 +28,6 @@ function App() {
     const dbRef = firebase.database().ref();
     dbRef.on("value", (snapshot) => {
       const data = snapshot.val().itemsForSale;
-      // console.log(data['users']);
       const updatedAds = [];
       for(let key in data) {
         updatedAds.push(data[key]);
@@ -78,7 +77,6 @@ function App() {
         setCurrUser(username);
         setIsLoggedIn(true);
       }
-
     });
   }
 

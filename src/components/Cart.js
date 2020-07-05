@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react';
 
 const Cart = (props) => {
-    console.log("cart props", props);
     const [cartTotal, setCartTotal] = useState(0);
-    const [madepurchase, setMadePurchase] = useState(false);
+    const [madePurchase, setMadePurchase] = useState(false);
     
     useEffect( () => {
         // update the shopping cart total
@@ -16,6 +15,7 @@ const Cart = (props) => {
     return (
         <div>
             <h2>CheckOut</h2>
+            {madePurchase && <p>Thank You!</p>}        
             {props.cart.length === 0 && <p>No items in Cart!</p>}
             {props.cart.length > 0 && <div>
                 <ul>
