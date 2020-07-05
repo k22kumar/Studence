@@ -31,7 +31,6 @@ function App() {
       // console.log(data['users']);
       const updatedAds = [];
       for(let key in data) {
-        console.log(data[key]);
         updatedAds.push(data[key]);
       };
       setAds(updatedAds);
@@ -112,7 +111,11 @@ function App() {
   const addToCart = (ad) => {
     let newCart = cart;
     newCart.push(ad);
-    setCart = newCart;
+    setCart(newCart);
+  }
+
+  const confirmPurchase = () => {
+    setCart([]);
   }
 
   return (
@@ -123,8 +126,8 @@ function App() {
         <Route path="/account" render={() => <Account getSelectedAd={getSelectedAd} isLoggedIn={isLoggedIn} logUserIn={logUserIn} registerUser={registerUser} ads={ads}
           currUser={currUser}/>}/>
         <Route path="/postAd" render={() => <PostAd isLoggedIn={isLoggedIn} logUserIn={logUserIn} registerUser={registerUser} postAd={postAd}/>} />
-        <Route path="/fullAd/:id" render={() => <FullAd selectedAd={selectedAd} />} />
-        <Route path="/cart/" render={() => <Cart cart={cart} />} />
+        <Route path="/fullAd/:id" render={() => <FullAd addToCart={addToCart} selectedAd={selectedAd} />} />
+        <Route path="/cart/" render={() => <Cart cart={cart} confirmPurchase={confirmPurchase} />} />
       </div>
     </Router>  
   );
