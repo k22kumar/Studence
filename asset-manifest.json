@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/Studence/static/css/main.bf6cc0a4.chunk.css",
+    "main.js": "/Studence/static/js/main.ca46a733.chunk.js",
+    "main.js.map": "/Studence/static/js/main.ca46a733.chunk.js.map",
+    "runtime-main.js": "/Studence/static/js/runtime-main.9cb8212e.js",
+    "runtime-main.js.map": "/Studence/static/js/runtime-main.9cb8212e.js.map",
+    "static/js/2.db4b62ed.chunk.js": "/Studence/static/js/2.db4b62ed.chunk.js",
+    "static/js/2.db4b62ed.chunk.js.map": "/Studence/static/js/2.db4b62ed.chunk.js.map",
+    "index.html": "/Studence/index.html",
+    "precache-manifest.702f732903efd6a1431ac88e2e534261.js": "/Studence/precache-manifest.702f732903efd6a1431ac88e2e534261.js",
+    "service-worker.js": "/Studence/service-worker.js",
+    "static/css/main.bf6cc0a4.chunk.css.map": "/Studence/static/css/main.bf6cc0a4.chunk.css.map",
+    "static/js/2.db4b62ed.chunk.js.LICENSE.txt": "/Studence/static/js/2.db4b62ed.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9cb8212e.js",
+    "static/js/2.db4b62ed.chunk.js",
+    "static/css/main.bf6cc0a4.chunk.css",
+    "static/js/main.ca46a733.chunk.js"
+  ]
+}
