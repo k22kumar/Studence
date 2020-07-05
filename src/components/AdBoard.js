@@ -3,14 +3,13 @@ import Ad from './Ad';
 
 const AdBoard = (props) => {
     return (
-        <ul>
+        <div>
             {
                 props.ads.map((ad, index) => {
-                    console.log("the ad ", ad);
-                    return <Ad key={index} ad={ad} />;
+                    return <Ad key={index} ad={ad} getSelectedAd={props.getSelectedAd}/>;
                 })
             }
-        </ul>
+        </div>
     )
 }
 

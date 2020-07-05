@@ -5,59 +5,20 @@ import AdBoard from './components/AdBoard';
 import Account from './components/Account';
 import PostAd from './components/PostAd';
 import firebase from './components/firebase';
+import FullAd from './components/FullAd';
 import './App.scss';
 
 function App() {
   // state variables
+  // all posted ads on database
   const [ads,setAds] = useState([]);
+  // boolean check on whether user is logged in
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [currUser, setCurrUser] =useState("");
+  // grab username of current user
+  const [currUser, setCurrUser] = useState("");
+  // the ad that has been clicked on
+  const [selectedAd, setSelectedAd] = useState({});
   
-
-  // mock data
-  let mockUsers = [ 
-     {
-      username: "Kajanth",
-      password: "pass",
-      itemsForSale: [
-        {
-          name: 'pencil',
-          price: 40,
-          picture: 'picture',
-          description: 'alkjdflas jdfkasdj fl adf'
-        },
-        {
-          name: 'eraser',
-          price: 20,
-          picture: 'picture',
-          description: 'alk afds asd fakasdj fl adf'
-        },
-      ]
-    },
-  {
-        username: "George",
-        password: "pass",
-        itemsForSale: [
-          {
-            name: 'zoo trip',
-            price: 40,
-            picture: 'picture',
-            description: 'alkjdflas jdfkasdj fl adf'
-          },
-          {
-            name: 'eraser',
-            price: 30,
-            picture: 'https://en.wikipedia.org/wiki/Eraser#/media/File:Office-pink-erasers.jpg',
-            description: 'alk afds asd fakasdj fl adf'
-          },
-        ]
-    },
-    {
-      username: "Susan",
-      password: "pass",
-      itemsForSale: []
-    }
-  ];
 
   // component did mount, add a listener to Firebase database and listen for changes on ads
   useEffect(()=>{
@@ -83,8 +44,6 @@ function App() {
         if (username === data[key].username && password === data[key].password) {
           setCurrUser(username);
           setIsLoggedIn(true);
-          console.log("user attempt: ", data[key].username, username);
-          console.log("pass attempt: ", data[key].password, password);
           return true;
         }
         else {
@@ -103,17 +62,12 @@ function App() {
       // in the data go to the users key
       const data = snapshot.val().users;
       for (let key in data) {
-        console.log(data[key].username);
         // since ther is no ignoreCase method in javaScript use upper instead 
         if (username.toUpperCase() === data[key].username.toUpperCase()) {
           usernameTaken = true;
-          console.log("comparing: " + username.toUpperCase() + " " + data[key].username.toUpperCase());
-          console.log("username is taken!!");
           break;
         }
-        console.log(usernameTaken);
       }
-      console.log("final", usernameTaken);
       if (usernameTaken === false) {
         const dbRef2 = firebase.database().ref('users/');
         dbRef2.push({
@@ -133,7 +87,6 @@ function App() {
     let newAd = {};
     const dbRef = firebase.database().ref().once('value', (snapshot) => {
       const data = snapshot.val().itemsForSale;
-      console.log("len", Object.keys(data).length);
     
     newAd = {
       id: Object.keys(data).length + 1,
@@ -143,19 +96,26 @@ function App() {
       picture: picture,
       description: description
     }
-    console.log(newAd);
     });
     const itemsForSale = firebase.database().ref('itemsForSale/');
     itemsForSale.push(newAd);
+  }
+
+  // function that is passed to the Ad component and returns the ad the user clicked on to
+  // display full information
+  const getSelectedAd = (adObject) => {
+    setSelectedAd(adObject);
   }
 
   return (
     <Router>
       <div className="App">
         <Navigation/>
-        <Route exact path='/' render={(props) => <AdBoard  ads={ads}/>}/>
-        <Route path="/account" render={(props) => <Account isLoggedIn={isLoggedIn} logUserIn={logUserIn} registerUser={registerUser}/>}/>
-        <Route path="/postAd" render={(props) => <PostAd isLoggedIn={isLoggedIn} logUserIn={logUserIn} registerUser={registerUser} postAd={postAd}/>} />
+        <Route exact path='/' render={() => <AdBoard getSelectedAd={getSelectedAd} ads={ads}/>}/>
+        <Route path="/account" render={() => <Account getSelectedAd={getSelectedAd} isLoggedIn={isLoggedIn} logUserIn={logUserIn} registerUser={registerUser} ads={ads}
+          currUser={currUser}/>}/>
+        <Route path="/postAd" render={() => <PostAd isLoggedIn={isLoggedIn} logUserIn={logUserIn} registerUser={registerUser} postAd={postAd}/>} />
+        <Route path="/fullAd/:id" render={() => <FullAd selectedAd={selectedAd} />} />
       </div>
     </Router>  
   );

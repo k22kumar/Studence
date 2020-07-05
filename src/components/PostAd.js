@@ -60,7 +60,7 @@ const PostAd = (props) => {
                 <button onClick={(e)=> {searchPicture(e)}}>Search Picture</button>
                 <div>
                     {photoResults.map((photo, id) => {
-                        return <button key={id} className="picChoice" onClick={() => { setPicture(photo.src.medium)}} >
+                        return <button key={id} className="picChoice" onClick={() => { setPicture(photo.src.small)}} >
                                     <img src={photo.src.original} alt=""/>
                                 </button>
                     })
