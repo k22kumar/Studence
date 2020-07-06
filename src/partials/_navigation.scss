@@ -22,7 +22,7 @@
         .postAdNav {
             color: black;
             background-color: white;
-            border-radius: 12px;
+            border-radius: $smallRadius;
             &:hover, &focus {
                 color: $activeColor;
                 background-color: $activeButton;

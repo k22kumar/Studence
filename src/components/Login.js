@@ -21,24 +21,36 @@ const Login = (props) => {
     }
 
     return (
-        <ul>
-            <li>
+        <ul className="loginContainer">
+            <li className="flexParent flexColumn loginForm">
                 <h2>Sign In</h2>
-                <form action="">
-                    <label htmlFor="username">Username</label>
-                    <input type="text" id="username" onChange={(e) => { updateText(e, "signInUsername")}}/>
-                    <label htmlFor="password">Password</label>
-                    <input type="text" id="password" onChange={(e) => { updateText(e, "signInPassword")}}/>
+                <form action="" className="flexParent flexColumn">
+                    <div className="inputLabel">
+                        <label htmlFor="username">Username</label>
+                        <input type="text" id="username" placeholder="Enter Username"
+                        onChange={(e) => { updateText(e, "signInUsername") }} />
+                    </div>
+                    <div className="inputLabel">
+                        <label htmlFor="password">Password</label>
+                        <input type="text" id="password" placeholder="Enter Password"
+                        onChange={(e) => { updateText(e, "signInPassword") }} />
+                    </div>
                 </form>
                     <button onClick={() => props.logUserIn(signInUsername, signInPassword)}>Sign In</button>
             </li>
-            <li>
+            <li className="flexParent flexColumn registerForm">
                 <h2>Register</h2>
-                <form action="">
-                    <label htmlFor="newUsername">Username</label>
-                    <input type="text" id="newUsername" onChange={(e) => {updateText(e, "registerUsername")}}/>
-                    <label htmlFor="newPassword">Password</label>
-                    <input type="text" id="newPassword" onChange={(e) => { updateText(e, "registerPassword")}}/>
+                <form action="" className="flexParent flexColumn">
+                    <div className="inputLabel">
+                        <label htmlFor="newUsername">Username</label>
+                        <input type="text" id="newUsername" placeholder="Enter Username"
+                        onChange={(e) => { updateText(e, "registerUsername") }} />
+                    </div>
+                    <div className="inputLabel">
+                        <label htmlFor="newPassword">Password</label>
+                        <input type="text" id="newPassword" placeholder="Enter Password"
+                        onChange={(e) => { updateText(e, "registerPassword") }} />
+                    </div>
                     <button onClick={(e) => props.registerUser(registerUsername, registerPassword, e)}>Register</button>
                 </form>
             </li>

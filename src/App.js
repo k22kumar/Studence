@@ -32,6 +32,9 @@ function App() {
       for(let key in data) {
         updatedAds.push(data[key]);
       };
+      // sort by latest posted ad
+      updatedAds.sort((a, b) => b.id - a.id);
+      
       setAds(updatedAds);
     });
   }, []);
