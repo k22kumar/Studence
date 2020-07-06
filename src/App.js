@@ -122,8 +122,8 @@ function App() {
   return (
     <Router>
       <div className="App wrapper">
-        <Navigation/>
-        <Route path='/Studence' render={() => <AdBoard getSelectedAd={getSelectedAd} ads={ads}/>}/>
+        <Navigation cart={cart}/>
+        <Route path='/Studence' render={() => <AdBoard getSelectedAd={getSelectedAd} title={"Listings"} ads={ads}/>}/>
         <Route path="/account" render={() => <Account getSelectedAd={getSelectedAd} isLoggedIn={isLoggedIn} logUserIn={logUserIn} registerUser={registerUser} ads={ads}
           currUser={currUser}/>}/>
         <Route path="/postAd" render={() => <PostAd isLoggedIn={isLoggedIn} logUserIn={logUserIn} registerUser={registerUser} postAd={postAd}/>} />

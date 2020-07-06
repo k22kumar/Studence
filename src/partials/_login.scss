@@ -1,31 +1,7 @@
 .loginContainer {
-    background-color: white;
+    background-color: $secondaryBG;
     border-radius: $largeRadius;
     padding: 15px;
-    .loginForm, .registerForm {
-        label {
-            font-size: 1.7rem;
-        }
-        input {
-            margin: 5px;
-            font-size: 2rem;
-            height: 40px;
-            padding: 0 15px;
-            border: 3px solid #ebe6e2;
-            border-radius: 5px;
-        }
-        button {
-            padding: 10px;
-            font-size: 1.7rem;
-            transition: all 0.2s;
-            background-color: $normalButton;
-            border-radius: $smallRadius;
-            &:hover,&:focus {
-                background-color: $activeButton;
-                color: white;
-            } 
-        }
-    }
     .loginForm {
         margin-bottom: 30px;
     }

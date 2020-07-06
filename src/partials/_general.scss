@@ -46,6 +46,18 @@ input[type="submit"]{
     border-radius: 0;
 }
 
+
+textarea {
+    resize: none;
+    font-size: 1.6rem;
+    min-width: 250px;
+    width: 50%;
+    padding: 10px;
+    border: none;
+    resize: none;
+    overflow: auto;
+}
+
 img {
     max-width: 100%;
     display: block;
@@ -53,6 +65,20 @@ img {
 
 a {
     text-decoration: none;
+}
+
+label {
+    font-size: 1.7rem;
+    }
+
+input {
+    margin: 5px;
+    font-size: 1.7rem;
+    height: 40px;
+    padding: 0 15px;
+    border:none;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+    border-radius: 5px;
 }
 
 .wrapper {
@@ -84,3 +110,15 @@ a {
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
 }
+
+.siteButton {
+            padding: 10px;
+            font-size: 1.7rem;
+            transition: all 0.2s;
+            background-color: $normalButton;
+            border-radius: $smallRadius;
+            &:hover,&:focus {
+                background-color: $activeButton;
+                color: white;
+            } 
+        }
