@@ -1,3 +1,20 @@
+.adPostContainer{
+    background-color: $secondaryBG;
+    border-radius: $largeRadius;
+    padding: 10px;
+    form {
+        .inputLabel, button, p {
+            margin: 5px;
+        }
+        textarea {
+            margin: 10px;
+        }
+        p  {
+            font-size: 1.7rem;
+        }
+    }
+} 
+
 .picChoice {
     height: 100px;
     width: 100px;

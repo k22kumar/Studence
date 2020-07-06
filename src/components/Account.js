@@ -11,8 +11,7 @@ const Account = (props) => {
             {/* IF NOT LOGGEDIN show sign up stuff*/}
             {!props.isLoggedIn && <Login logUserIn={props.logUserIn} registerUser={props.registerUser}/>}
             {props.isLoggedIn && <div>
-                    <h3>Your Ads</h3>
-                    <AdBoard getSelectedAd={props.getSelectedAd} ads={myAds}/>
+                    <AdBoard getSelectedAd={props.getSelectedAd} ads={myAds} title={"Your Ads"}/>
                     </div>
             }
         </div>

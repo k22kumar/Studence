@@ -119,15 +119,19 @@ function App() {
     setCart([]);
   }
 
+  const download = () => {
+    this.printWindow();
+  }
+
   return (
     <Router>
       <div className="App wrapper">
-        <Navigation/>
-        <Route path='/Studence' render={() => <AdBoard getSelectedAd={getSelectedAd} ads={ads}/>}/>
+        <Navigation cart={cart}/>
+        <Route path='/Studence' render={() => <AdBoard getSelectedAd={getSelectedAd} title={"Listings"} ads={ads}/>}/>
         <Route path="/account" render={() => <Account getSelectedAd={getSelectedAd} isLoggedIn={isLoggedIn} logUserIn={logUserIn} registerUser={registerUser} ads={ads}
           currUser={currUser}/>}/>
         <Route path="/postAd" render={() => <PostAd isLoggedIn={isLoggedIn} logUserIn={logUserIn} registerUser={registerUser} postAd={postAd}/>} />
-        <Route path="/fullAd/:id" render={() => <FullAd addToCart={addToCart} selectedAd={selectedAd} />} />
+        <Route path="/fullAd/:id" render={() => <FullAd download={download} addToCart={addToCart} selectedAd={selectedAd} />} />
         <Route path="/cart/" render={() => <Cart cart={cart} confirmPurchase={confirmPurchase} />} />
       </div>
     </Router>  

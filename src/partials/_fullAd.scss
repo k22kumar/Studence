@@ -1,0 +1,28 @@
+.fullAdContainer {
+    background-color: $secondaryBG;
+    border-radius: $largeRadius;
+    max-width: 400px;
+    margin: 0 auto;
+    a {
+        color: black;
+    }
+    h2 {
+        text-align: center;
+    }
+    p {
+        font-size: 1.7rem;
+        width: 100%;
+    }
+    li {
+        margin: 10px 0;
+    }
+    .price {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin: 10px 0;
+    }
+    .buy {
+        margin-left: 10px;
+    }
+}
+
