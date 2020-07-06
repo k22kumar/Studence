@@ -1,0 +1,25 @@
+.adListing {
+    width: 90%;
+    padding: 10px 0;
+    margin: 15px 0;
+    border-bottom: 5px solid black;
+    &:hover,&:focus {
+        background-color: $normalButton;
+        border-bottom: 5px solid #8447FF;
+    } 
+    transition: all 0.2s;
+    .adPicContainer, .adListingText {
+        width: 50%;
+    }
+    .adPicContainer {
+        img {
+            max-width: 200px;
+        }
+    }
+    .adListingText {
+        h3, p {
+            color: black;
+            font-size: 1.8rem;
+        }
+    }
+}

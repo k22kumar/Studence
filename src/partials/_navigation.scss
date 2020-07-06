@@ -1,0 +1,31 @@
+.mainMenu {
+    justify-content: space-evenly;
+    margin: 20px;
+        a {
+            &:not(:first-child) {
+                padding: 10px;
+            }
+            border-bottom: 3px solid $bgColor;
+            transition: all 0.3s;
+            color: white;
+            font-size: 2rem;
+            h1 {
+                font-size: 4rem;
+                color: white;
+                padding-bottom: 10px;
+            }
+            &:hover, &:focus {
+                    border-bottom: 3px solid $activeButton;
+                    color: black;
+                }
+        }
+        .postAdNav {
+            color: black;
+            background-color: white;
+            border-radius: $smallRadius;
+            &:hover, &focus {
+                color: $activeColor;
+                background-color: $activeButton;
+            }
+        }
+}

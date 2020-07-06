@@ -32,6 +32,9 @@ function App() {
       for(let key in data) {
         updatedAds.push(data[key]);
       };
+      // sort by latest posted ad
+      updatedAds.sort((a, b) => b.id - a.id);
+      
       setAds(updatedAds);
     });
   }, []);
@@ -85,8 +88,7 @@ function App() {
     e.preventDefault();
     let newAd = {};
     const dbRef = firebase.database().ref().once('value', (snapshot) => {
-      const data = snapshot.val().itemsForSale;
-    
+    const data = snapshot.val().itemsForSale;
     newAd = {
       id: Object.keys(data).length + 1,
       username: currUser,
@@ -98,6 +100,7 @@ function App() {
     });
     const itemsForSale = firebase.database().ref('itemsForSale/');
     itemsForSale.push(newAd);
+    document.getElementById("adPost").reset();
   }
 
   // function that is passed to the Ad component and returns the ad the user clicked on to
@@ -118,9 +121,9 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
+      <div className="App wrapper">
         <Navigation/>
-        <Route exact path='/' render={() => <AdBoard getSelectedAd={getSelectedAd} ads={ads}/>}/>
+        <Route path='/Studence' render={() => <AdBoard getSelectedAd={getSelectedAd} ads={ads}/>}/>
         <Route path="/account" render={() => <Account getSelectedAd={getSelectedAd} isLoggedIn={isLoggedIn} logUserIn={logUserIn} registerUser={registerUser} ads={ads}
           currUser={currUser}/>}/>
         <Route path="/postAd" render={() => <PostAd isLoggedIn={isLoggedIn} logUserIn={logUserIn} registerUser={registerUser} postAd={postAd}/>} />

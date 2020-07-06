@@ -7,7 +7,12 @@ const FullAd = (props) => {
     return (
         <div>
             <h2>{selectedAd.title}</h2>
-            <img src={selectedAd.picture} alt=""/>
+            {
+                // if ther is no pic than put default no image available
+                selectedAd.picture === "" ?
+                    <img src={require("../assets/noImageAvailable.jpg")} alt={selectedAd.title} /> :
+                    <img src={selectedAd.picture} alt={selectedAd.title} />
+            }
             <p>{selectedAd.price}</p>
             <p>{selectedAd.description}</p>
             <p>Sold by: {selectedAd.username}</p>

@@ -41,11 +41,20 @@ const PostAd = (props) => {
         })
     }
 
+    const clearInput = () => {
+        setTitle("");
+        setPrice("");
+        setPicture("");
+        setPhotoResults([]);
+        setDescription("");
+        setSearchPic("");
+    }
+
     return(
         <div>
             {!props.isLoggedIn && <Login logUserIn={props.logUserIn} registerUser={props.registerUser}/>}
             {props.isLoggedIn && 
-            <form action="" >
+            <form action="" id="adPost">
                 <label htmlFor="title">Title</label>
                 <input required type="text" id="title" onChange={(e) => { updateText(e, "title")}}/>
                 <label htmlFor="price">Price</label>
@@ -53,6 +62,7 @@ const PostAd = (props) => {
                 <label htmlFor="searchPic">Search for Picture</label>
                 <input type="text" id="searchPic" onChange={(e) => { updateText(e, "searchPic")}}/>
                 <button onClick={(e)=> {searchPicture(e)}}>Search Picture</button>
+                {picture === "" && <p>It is recommended you provide a picture!</p>}
                 <div>
                     {photoResults.map((photo, id) => {
                         return <button key={id} className="picChoice" onClick={() => { setPicture(photo.src.small)}} >
@@ -62,7 +72,7 @@ const PostAd = (props) => {
                     }
                 </div>
                 <label htmlFor="description">Description</label>
-                <input required type="text" id="description" onChange={(e) => { updateText(e, "description")}}/>
+                <textarea required name="description" id="description" id="description" onChange={(e) => { updateText(e, "description") }} cols="30" rows="10"></textarea>
                 <button onClick={(e) => {
                     props.postAd(title, price, picture, description, e);
                 }} >Upload Ad</button>
