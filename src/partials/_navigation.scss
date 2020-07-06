@@ -2,10 +2,30 @@
     justify-content: space-evenly;
     margin: 20px;
         a {
-            color: white;
+            &:not(:first-child) {
+                padding: 10px;
+            }
+            border-bottom: 3px solid $bgColor;
+            transition: all 0.3s;
+            color: $normalColor;
             font-size: 2rem;
             h1 {
                 font-size: 4rem;
+                color: white;
+                padding-bottom: 10px;
+            }
+            &:hover, &:focus {
+                    border-bottom: 3px solid $activeButton;
+                    color: $activeColor;
+                }
+        }
+        .postAdNav {
+            color: $normalColor;
+            background-color: $normalButton;
+            border-radius: 12px;
+            &:hover, &focus {
+                color: $activeColor;
+                background-color: $activeButton;
             }
         }
 }

@@ -118,7 +118,7 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
+      <div className="App wrapper">
         <Navigation/>
         <Route path='/Studence' render={() => <AdBoard getSelectedAd={getSelectedAd} ads={ads}/>}/>
         <Route path="/account" render={() => <Account getSelectedAd={getSelectedAd} isLoggedIn={isLoggedIn} logUserIn={logUserIn} registerUser={registerUser} ads={ads}
