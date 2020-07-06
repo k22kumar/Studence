@@ -7,7 +7,7 @@
             }
             border-bottom: 3px solid $bgColor;
             transition: all 0.3s;
-            color: $normalColor;
+            color: white;
             font-size: 2rem;
             h1 {
                 font-size: 4rem;
@@ -16,12 +16,12 @@
             }
             &:hover, &:focus {
                     border-bottom: 3px solid $activeButton;
-                    color: $activeColor;
+                    color: black;
                 }
         }
         .postAdNav {
-            color: $normalColor;
-            background-color: $normalButton;
+            color: black;
+            background-color: white;
             border-radius: 12px;
             &:hover, &focus {
                 color: $activeColor;
