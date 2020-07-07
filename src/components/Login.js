@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 
 const Login = (props) => {
 
@@ -18,6 +18,20 @@ const Login = (props) => {
         } else if (specificState === "registerPassword") {
             setRegisterPassword(e.target.value);
         } else {}
+        (signInPassword !== "" && signInUsername !== "") ? 
+            enable("signIn") :
+            disable("signIn");
+        (registerPassword !== "" && registerUsername !== "") ?
+            enable("register") :
+            disable("register");
+    }
+
+    // function to disable upload button for wrong input
+    const enable = (buttonID) => {
+        document.getElementById(buttonID).classList.remove("disabled");
+    }
+    const disable = (buttonID) => {
+        document.getElementById(buttonID).classList.add("disabled");
     }
 
     return (
@@ -36,7 +50,7 @@ const Login = (props) => {
                         onChange={(e) => { updateText(e, "signInPassword") }} />
                     </div>
                 </form>
-                    <button className="siteButton" onClick={() => props.logUserIn(signInUsername, signInPassword)}>Sign In</button>
+                    <button className="siteButton disabled" id="signIn" onClick={() => props.logUserIn(signInUsername, signInPassword)}>Sign In</button>
             </li>
             <li className="flexParent flexColumn registerForm">
                 <h2>Register</h2>
@@ -51,7 +65,7 @@ const Login = (props) => {
                         <input type="text" id="newPassword" placeholder="Enter Password"
                         onChange={(e) => { updateText(e, "registerPassword") }} />
                     </div>
-                    <button className="siteButton" onClick={(e) => props.registerUser(registerUsername, registerPassword, e)}>Register</button>
+                    <button className="siteButton disabled" id="register" onClick={(e) => props.registerUser(registerUsername, registerPassword, e)}>Register</button>
                 </form>
             </li>
         </ul>

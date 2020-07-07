@@ -1,0 +1,22 @@
+.checkoutContainer {
+    background-color: $secondaryBG;
+    border-radius: $largeRadius;
+    padding: 15px;
+    font-size: 1.7rem;
+    h2, h3 , p{
+        text-align: center;
+        margin: 5px 0;
+    }
+    ul, h3 {
+        width: 60%;
+    }
+    h3 {
+        border-top: 5px solid black;
+        margin-bottom: 20px;
+    }
+    .checkOutItem{
+        p{
+            margin: 15px;
+        }
+    } 
+}

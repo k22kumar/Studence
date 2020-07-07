@@ -122,3 +122,10 @@ input {
                 color: white;
             } 
         }
+
+.disabled {
+    background-color: grey;
+    color: white;
+    pointer-events: none;
+    cursor: not-allowed;
+}
