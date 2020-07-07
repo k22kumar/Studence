@@ -34,7 +34,6 @@ function App() {
       };
       // sort by latest posted ad
       updatedAds.sort((a, b) => b.id - a.id);
-      
       setAds(updatedAds);
     });
   }, []);
@@ -49,9 +48,6 @@ function App() {
           setCurrUser(username);
           setIsLoggedIn(true);
           return true;
-        }
-        else {
-          console.log("fail");
         }
       }
     });
@@ -84,7 +80,7 @@ function App() {
   }
 
   // function that allows a user to post an ad
-  const postAd = (title, price, picture, description, e) => {
+  const postAd = (title, price, picture, bigPicture, description, e) => {
     e.preventDefault();
     let newAd = {};
     const dbRef = firebase.database().ref().once('value', (snapshot) => {
@@ -95,6 +91,7 @@ function App() {
       title: title,
       price: price,
       picture: picture,
+      bigPicture: bigPicture,
       description: description
     }
     });

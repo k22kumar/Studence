@@ -13,21 +13,21 @@ const Cart = (props) => {
     });
 
     return (
-        <div>
+        <div className="checkoutContainer">
             <h2>CheckOut</h2>
             {madePurchase && <p>Thank You!</p>}        
             {props.cart.length === 0 && <p>No items in Cart!</p>}
-            {props.cart.length > 0 && <div>
+            {props.cart.length > 0 && <div className="flexParent flexColumn">
                 <ul>
                     {props.cart.map((item, index) => {
-                        return <li key={index}>
+                        return <li key={index} className="flexParent checkOutItem">
                             <p>{item.title}</p>
-                            <p>{item.price}</p>
+                            <p>${item.price}</p>
                         </li>
                     })}
                 </ul>
-                <h3>Total: {cartTotal}</h3>
-                <button onClick={() => {
+                <h3>Total: ${cartTotal}</h3>
+                <button className="siteButton" onClick={() => {
                     setMadePurchase(true);
                     props.confirmPurchase();
                 }}>Confirm Purchase</button>

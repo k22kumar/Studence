@@ -1,9 +1,9 @@
 .adPostContainer{
     background-color: $secondaryBG;
     border-radius: $largeRadius;
-    padding: 10px;
+    
     form {
-        .inputLabel, button, p {
+        .inputLabelAd, .searchPic, .uploadAd, p {
             margin: 5px;
         }
         textarea {
@@ -11,6 +11,8 @@
         }
         p  {
             font-size: 1.7rem;
+            margin: 10px 0;
+            font-weight: bold;
         }
     }
 } 
